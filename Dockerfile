@@ -12,4 +12,4 @@ COPY metrics.py /usr/src/app
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 # Define environment variable
-ENV NAME metrics
+ENTRYPOINT ["python", "system_metrics.py"]
