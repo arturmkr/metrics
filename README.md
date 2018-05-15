@@ -15,7 +15,7 @@ The script accept a single parameter to specify which metrics set to print:
     pip install psutil
     
 ## Examples
-  > python metrics.py cpu<br />
+  $ python metrics.py cpu<br />
   system.cpu.idle 102372.04<br />
   system.cpu.user 3823.41<br />
   system.cpu.guest 0.0<br />
@@ -23,7 +23,7 @@ The script accept a single parameter to specify which metrics set to print:
   system.cpu.stolen 0.0<br />
   system.cpu.system 3195.7<br />
 
-  > python metrics.py mem<br />
+  $ python metrics.py mem<br />
   virtual total 2096066560<br />
   virtual used 134221824<br />
   virtual free 123850752<br />
