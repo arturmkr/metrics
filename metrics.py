@@ -1,28 +1,35 @@
-import sys
 import psutil
+import argparse
 
-try:
-	metric_to_print = sys.argv[1]
-except Exception:
-	print "Agrument is needed. Use (cpu | mem)"
-	sys.exit(1)
+def print_cpu_metrics():
+    cpu_times = psutil.cpu_times()
+    print("system.cpu.idle", cpu_times.idle)
+    print("system.cpu.user", cpu_times.user)
+    print("system.cpu.guest", cpu_times.guest)
+    print("system.cpu.iowait", cpu_times.iowait)
+    print("system.cpu.stolen", cpu_times.steal)
+    print("system.cpu.system", cpu_times.system)
 
-if metric_to_print == "cpu":
-	cpu = psutil.cpu_times(percpu=False)
-	print "system.cpu.idle", cpu.idle
-	print "system.cpu.user", cpu.user
-	print "system.cpu.guest", cpu.guest
-	print "system.cpu.iowait", cpu.iowait
-	print "system.cpu.stolen", cpu.steal
-	print "system.cpu.system", cpu.system
+def print_mem_metrics():
+    virtual_mem = psutil.virtual_memory()
+    swap_mem = psutil.swap_memory()
+    print("virtual total", virtual_mem.total)
+    print("virtual used", virtual_mem.used)
+    print("virtual free", virtual_mem.free)
+    print("virtual shared", virtual_mem.shared)
+    print("swap total", swap_mem.total)
+    print("swap used", swap_mem.used)
+    print("swap free", swap_mem.free)
 
-elif metric_to_print == "mem":
-	print "virtual total", psutil.virtual_memory().total
-	print "virtual used", psutil.virtual_memory().used
-	print "virtual free", psutil.virtual_memory().free
-	print "virtual shared", psutil.virtual_memory().shared
-	print "swap total", psutil.swap_memory().total
-	print "swap used", psutil.swap_memory().used
-	print "swap free", psutil.swap_memory().free
-else:
-	print "Wrong agrument. Use (cpu | mem)"
+def main():
+    parser = argparse.ArgumentParser(description='Print system metrics.')
+    parser.add_argument('metric', choices=['cpu', 'mem'], help='Type of metric to print')
+    args = parser.parse_args()
+
+    if args.metric == 'cpu':
+        print_cpu_metrics()
+    elif args.metric == 'mem':
+        print_mem_metrics()
+
+if __name__ == '__main__':
+    main()
