@@ -7,5 +7,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY metrics.py .
 
-ENTRYPOINT ["python", "./metrics.py"]
+ENTRYPOINT ["python", "./app.py"]
 CMD []
