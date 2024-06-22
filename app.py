@@ -21,15 +21,15 @@ def print_mem_metrics():
     print("swap used", swap_mem.used)
     print("swap free", swap_mem.free)
 
-def main():
-    parser = argparse.ArgumentParser(description='Print system metrics.')
-    parser.add_argument('metric', choices=['cpu', 'mem'], help='Type of metric to print')
-    args = parser.parse_args()
-
-    if args.metric == 'cpu':
+def metrics_main(metric_type):
+    if metric_type == 'cpu':
         print_cpu_metrics()
-    elif args.metric == 'mem':
+    elif metric_type == 'mem':
         print_mem_metrics()
 
 if __name__ == '__main__':
-    main()
+    import argparse
+    parser = argparse.ArgumentParser(description='Print system metrics.')
+    parser.add_argument('metric', choices=['cpu', 'mem'], help='Type of metric to print')
+    args = parser.parse_args()
+    metrics_main(args.metric)
